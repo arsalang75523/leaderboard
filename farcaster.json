@@ -1,0 +1,38 @@
+{
+    "accountAssociation": {
+      "header": "base64url-encoded-header",
+      "payload": "base64url-encoded-payload",
+      "signature": "base64url-encoded-signature"
+    },
+    "frame": {
+      "version": "1",
+      "name": "Leaderboard",
+      "homeUrl": "https://arsalang75523.github.io/leaderboard/",
+      "iconUrl": "https://arsalang75523.github.io/leaderboard/img/icon.png",
+      "splashImageUrl": "https://arsalang75523.github.io/leaderboard/img/splash.png",
+      "splashBackgroundColor": "#eeeee4",
+      "webhookUrl": "https://arsalang75523.github.io/leaderboard/webhook"
+    },
+    "embed": {
+      "version": "next",
+      "imageUrl": "https://arsalang75523.github.io/leaderboard/img/start.png",
+      "button": {
+        "title": "View Leaderboard",
+        "action": {
+          "type": "launch_frame",
+          "name": "Leaderboard",
+          "url": "https://arsalang75523.github.io/leaderboard/",
+          "splashImageUrl": "https://arsalang75523.github.io/leaderboard/img/splash.png",
+          "splashBackgroundColor": "#eeeee4"
+        }
+      }
+    },
+    "triggers": [
+      {
+        "type": "cast",
+        "id": "leaderboard-view",
+        "url": "https://arsalang75523.github.io/leaderboard/triggers/cast"
+      }
+    ]
+  }
+  
