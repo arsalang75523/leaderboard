@@ -1,10 +1,12 @@
-// Get DOM elements
+// DOM Elements
 const form = document.getElementById('userForm');
 const leaderboardTable = document.getElementById('leaderboard');
 
-// Load leaderboard from localStorage
+// Load Leaderboard Data
 function loadLeaderboard() {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    
+    // Clear the existing table rows
     leaderboardTable.innerHTML = `
         <tr>
             <th>Name</th>
@@ -12,6 +14,8 @@ function loadLeaderboard() {
             <th>Streak</th>
         </tr>
     `;
+
+    // Populate leaderboard table
     leaderboard.forEach(user => {
         const row = leaderboardTable.insertRow();
         row.innerHTML = `
@@ -22,46 +26,43 @@ function loadLeaderboard() {
     });
 }
 
-// Register new user
+// Add New User to Leaderboard
 form.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value;
     const wallet = document.getElementById('wallet').value;
 
-    // Create user object
     const newUser = {
         name: name,
         wallet: wallet,
-        streak: 1
+        streak: 1 // Start streak at 1
     };
 
-    // Get existing leaderboard data from localStorage
+    // Get leaderboard data from localStorage
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
 
-    // Add the new user to the leaderboard
+    // Add new user and save back to localStorage
     leaderboard.push(newUser);
-
-    // Save the updated leaderboard to localStorage
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 
     // Reload leaderboard
     loadLeaderboard();
 
-    // Clear the form
+    // Clear form
     form.reset();
 });
 
-// Increase streak every 24 hours
+// Automatically increment streak every 24 hours
 setInterval(() => {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     const updatedLeaderboard = leaderboard.map(user => {
-        user.streak += 1;
+        user.streak += 1; // Increment streak
         return user;
     });
     localStorage.setItem('leaderboard', JSON.stringify(updatedLeaderboard));
     loadLeaderboard();
 }, 24 * 60 * 60 * 1000); // 24 hours interval
 
-// Initial load of leaderboard
+// Load leaderboard on page load
 loadLeaderboard();
